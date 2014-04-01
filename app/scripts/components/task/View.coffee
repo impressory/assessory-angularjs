@@ -2,5 +2,6 @@ angular.module('assessory.task').controller 'task.View', ($scope, CourseService,
 
   $scope.task = task
 
-  $scope.course = CourseService.get(task.course)
+  CourseService.get(task.course).then (course) ->
+    $scope.course = course
     

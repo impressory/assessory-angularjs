@@ -2,9 +2,11 @@ angular.module("assessory.group").controller "group.ViewGroupSet", ($scope, Cour
 
   $scope.groupSet = groupSet
 
-  $scope.course = CourseService.get(groupSet.course)
+  CourseService.get(groupSet.course).then (course) ->
+    $scope.course = course
 
   $scope.refreshGroups = () ->
-    $scope.groups = GroupService.byGroupSet(groupSet.id)
+    GroupService.byGroupSet(groupSet.id).then (groups) ->
+      $scope.groups = groups
 
   $scope.refreshGroups()

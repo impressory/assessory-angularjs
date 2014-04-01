@@ -8,24 +8,39 @@ angular.module('assessory.task').service 'TaskOutputService', ($http, $cacheFact
 
     get: (id) ->
       toCache.get(id) || (
-        prom = $http.get("#{ConfigService.apiBase}/taskoutput/#{id}").then(
+        prom = $http(
+          withCredentials: true
+          method: "GET"
+          url: "#{ConfigService.apiBase}/taskoutput/#{id}"
+        ).then(
           (successRes) -> successRes.data
         )
         toCache.put(id, prom)
         prom
       )
 
-    updateBody: (to) -> $http.post("#{ConfigService.apiBase}/taskoutput/#{to.id}", to).then((res) ->
-      gs = res.data
-      toCache.put(gs.id, gs)
-      gs
-    )
+    updateBody: (to) ->
+      $http(
+        withCredentials: true
+        method: "POST"
+        url: "#{ConfigService.apiBase}/taskoutput/#{to.id}"
+        data: to
+      ).then(
+        (successRes) -> successRes.data
+      )
 
-    saveNew: (to) -> $http.post("#{ConfigService.apiBase}/task/#{to.task}/newOutput", to).then((res) ->
-      gs = res.data
-      toCache.put(gs.id, gs)
-      gs
-    )
+    saveNew: (to) ->
+      $http(
+        withCredentials: true
+        method: "POST"
+        url: "#{ConfigService.apiBase}/task/#{to.task}/newOutput"
+        data: to
+      ).then((res) ->
+        gs = res.data
+        toCache.put(gs.id, gs)
+        gs
+      )
+
 
     save: (to) ->
       if to.id?
@@ -33,7 +48,17 @@ angular.module('assessory.task').service 'TaskOutputService', ($http, $cacheFact
       else
         @saveNew(to)
 
-    relevantToMe: (taskId) -> $http.get("#{ConfigService.apiBase}/task/#{taskId}/relevantToMe").then((res) -> res.data)
+    relevantToMe: (taskId) ->
+      $http(
+        withCredentials: true
+        method: "GET"
+        url: "#{ConfigService.apiBase}/task/#{taskId}/relevantToMe"
+      ).then((res) -> res.data)
 
-    myOutputs: (taskId) -> $http.get("#{ConfigService.apiBase}/task/#{taskId}/myOutputs").then((res) -> res.data)
+    myOutputs: (taskId) ->
+      $http(
+        withCredentials: true
+        method: "GET"
+        url: "#{ConfigService.apiBase}/task/#{taskId}/myOutputs"
+      ).then((res) -> res.data)
   }

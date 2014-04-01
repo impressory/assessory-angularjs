@@ -1,0 +1,9 @@
+<div ng-if="taskOutput">
+
+  <questionnaire-fill questionnaire="task.body.questionnaire" answers="taskOutput.body.answers" ></questionnaire-fill>
+  <div>
+    <button class="btn btn-default" ng-click="save(false)">Save</button>
+    <button class="btn btn-primary"  ng-click="save(true)">Save &amp; publish</button>
+  </div>
+
+</div>

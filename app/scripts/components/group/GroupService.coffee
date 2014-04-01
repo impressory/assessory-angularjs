@@ -70,7 +70,6 @@ angular.module('assessory.group').service 'GroupService', ($http, $cacheFactory,
         withCredentials: true
         method: 'POST'
         url: "#{ConfigService.apiBase}/groupSet/#{groupSetId}/groups"
-        data: { ids: ids }
       ).then((res) -> res.data)
 
     courseGroupSets: (courseId) ->

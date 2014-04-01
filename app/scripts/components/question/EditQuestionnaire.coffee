@@ -42,7 +42,7 @@ angular.module('assessory.task').directive "questionnaireEdit", () ->
   {
     scope: { questionnaire: '=questionnaire' }
     controller: 'question.EditQuestionnaire'
-    templateUrl: "directive_questionnaireEdit.html"
+    templateUrl: "/views/components/question/directive_questionnaireEdit.html"
     restrict: 'E'
   }
 
@@ -51,7 +51,7 @@ angular.module('assessory.task').directive "questionnaireFill", () ->
   {
     scope: { questionnaire: '=questionnaire', answers: "=answers" }
     controller: 'question.FillQuestionnaire'
-    templateUrl: "directive_questionnaireFill.html"
+    templateUrl: "/views/components/question/directive_questionnaireFill.html"
     restrict: 'E'
   }
 
@@ -59,6 +59,6 @@ angular.module('assessory.task').directive "questionnaireView", () ->
   {
     scope: { questionnaire: '=questionnaire', answers: "=answers", qfilter: "=filter" }
     controller: 'ViewQuestionnaire'
-    templateUrl: "directive_questionnaireView.html"
+    templateUrl: "/views/components/question/directive_questionnaireView.html"
     restrict: 'E'
   }

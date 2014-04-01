@@ -5,5 +5,6 @@
 #
 angular.module('assessory.user').controller "user.Self", ($scope, UserService) ->
     
-  $scope.user = UserService.self()
+  UserService.self().then (user) ->
+    $scope.user = user
     
