@@ -14,20 +14,19 @@ angular.module('assessory.task').controller 'critique.CritFill', ($scope, TaskOu
 
   $scope.$watch("target", (nv) ->
     $scope.taskOutput = null
+    $scope.promise = null
+    $scope.error = null
+    $scope.success = null
 
     CritiqueService.getCritique($scope.task.id, $scope.target).then (taskOutput) ->
       $scope.taskOutput = taskOutput
   )
 
   $scope.save = (finalise) ->
-    $scope.saveMsg = []
     if $scope.taskOutput?
       copied = angular.copy($scope.taskOutput)
       copied.finalise = finalise
-      TaskOutputService.updateBody(copied).then(
-        (data) -> $scope.saveMsg = [ "saved" ],
-        (err) -> $scope.saveMsg = [ "Yikes, there was an error" ]
-      )
+      $scope.promise = TaskOutputService.updateBody(copied)
 
 
 
@@ -109,11 +108,19 @@ angular.module('assessory.task').directive "critiqueFill", () ->
 
 angular.module('assessory.task').directive "targetLabel", () ->
   {
-    scope: { target: '=target' }
+    scope: { target: '=target', index: '=' }
     templateUrl: "/views/components/critique/directive_targetLabel.html"
     restrict: 'E'
   }
-    
+
+angular.module('assessory.task').directive "targetInfo", () ->
+  {
+    scope: { target: '=target', index: '=' }
+    templateUrl: "/views/components/critique/directive_targetInfo.html"
+    restrict: 'E'
+  }
+
+
 angular.module('assessory.task').directive "allocationInfo", () ->
   {
     scope: { allocation: '=allocation' }

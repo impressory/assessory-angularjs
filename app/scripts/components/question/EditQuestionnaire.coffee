@@ -57,8 +57,8 @@ angular.module('assessory.task').directive "questionnaireFill", () ->
 
 angular.module('assessory.task').directive "questionnaireView", () ->
   {
-    scope: { questionnaire: '=questionnaire', answers: "=answers", qfilter: "=filter" }
-    controller: 'ViewQuestionnaire'
+    scope: { questionnaire: '=questionnaire', answers: "=answers", qfilter: "=qfilter" }
+    controller: 'question.ViewQuestionnaire'
     templateUrl: "/views/components/question/directive_questionnaireView.html"
     restrict: 'E'
   }

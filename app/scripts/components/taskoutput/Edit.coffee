@@ -12,7 +12,7 @@ angular.module('assessory.task').controller 'taskoutput.Edit', ($scope, $locatio
   $scope.save = (finalise) ->
     $scope.errors = []
     $scope.taskoutput.finalise = finalise
-    TaskOutputService.updateBody($scope.taskoutput).then(
+    $scope.promise = TaskOutputService.updateBody($scope.taskoutput).then(
       (to) -> $location.path("/taskoutput/#{$scope.taskoutput.id}")
-      (res) -> $scope.errors = [ res.data?.error || 'Unexpected error' ]
+      (res) -> res.data
     )
